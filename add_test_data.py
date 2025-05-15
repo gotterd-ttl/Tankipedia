@@ -17,14 +17,14 @@ with app.app_context():
         db.session.add(soviet_union)
     db.session.commit()
 
-    # Список танков для добавления
+    # Список танков для добавления с указанием их класса (type)
     tanks = [
-        {"name": "Тигр", "description": "Тяжелый танк Германии.", "photo": "tiger.jpg", "nation_id": germany.id},
-        {"name": "Пантера", "description": "Средний танк Германии.", "photo": "panther.jpg", "nation_id": germany.id},
-        {"name": "Маус", "description": "Сверхтяжелый танк Германии.", "photo": "maus.jpg", "nation_id": germany.id},
-        {"name": "Т-34", "description": "Средний танк СССР.", "photo": "t34.jpg", "nation_id": soviet_union.id},
-        {"name": "ИС-2", "description": "Тяжелый танк СССР.", "photo": "is2.jpg", "nation_id": soviet_union.id},
-        {"name": "КВ-1", "description": "Тяжелый танк СССР.", "photo": "kv1.jpg", "nation_id": soviet_union.id},
+        {"name": "Тигр", "description": "Тяжелый танк Германии.", "photo": "tiger.jpg", "nation_id": germany.id, "type": "heavy"},
+        {"name": "Пантера", "description": "Средний танк Германии.", "photo": "panther.jpg", "nation_id": germany.id, "type": "medium"},
+        {"name": "Маус", "description": "Сверхтяжелый танк Германии.", "photo": "maus.jpg", "nation_id": germany.id, "type": "heavy"},
+        {"name": "Т-34", "description": "Средний танк СССР.", "photo": "t34.jpg", "nation_id": soviet_union.id, "type": "medium"},
+        {"name": "ИС-2", "description": "Тяжелый танк СССР.", "photo": "is2.jpg", "nation_id": soviet_union.id, "type": "heavy"},
+        {"name": "КВ-1", "description": "Тяжелый танк СССР.", "photo": "kv1.jpg", "nation_id": soviet_union.id, "type": "heavy"},
     ]
 
     # Добавляем танки в базу данных
