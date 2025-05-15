@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ nation.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Танки {{ nation.name }}</h1>
+
+    <!-- Форма фильтрации и сортировки -->
+    <form method="get" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <select name="type" class="form-select">
+                    <option value="">Все</option>
+                    <option value="heavy" {% if tank_type == 'heavy' %}selected{% endif %}>Тяжелый</option>
+                    <option value="medium" {% if tank_type == 'medium' %}selected{% endif %}>Средний</option>
+                    <option value="light" {% if tank_type == 'light' %}selected{% endif %}>Легкий</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="sort_by" class="form-select">
+                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>По имени</option>
+                    <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>По рейтингу</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary">Применить</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Карточки танков -->
+    <div class="row">
+        {% for tank in tanks %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ url_for('static', filename='images/' + tank.photo) }}" class="card-img-top" alt="{{ tank.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ tank.name }}</h5>
+                        <p class="card-text">{{ tank.description }}</p>
+                        <a href="{{ url_for('tank_detail', tank_id=tank.id) }}" class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

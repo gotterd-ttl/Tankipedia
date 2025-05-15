@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tank.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">{{ tank.name }}</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/' + tank.photo) }}" class="img-fluid" alt="{{ tank.name }}">
+        </div>
+        <div class="col-md-6">
+            <p>{{ tank.description }}</p>
+            <h2>Средний рейтинг: {{ avg_rating|round(2) }}</h2>
+            <form method="post" class="mt-4">
+                <div class="mb-3">
+                    <label for="score" class="form-label">Оцените танк (1-5):</label>
+                    <input type="number" name="score" id="score" class="form-control" min="1" max="5" required>
+                </div>
+                <button type="submit" class="btn btn-success">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Информация из Wikipedia -->
+    <h3>Информация из Wikipedia</h3>
+    {% if tank_info.error %}
+        <p class="text-danger">{{ tank_info.error }}</p>
+    {% else %}
+        <p><strong>{{ tank_info.title }}</strong></p>
+        <p>{{ tank_info.summary }}</p>
+        <a href="{{ tank_info.url }}" target="_blank" class="btn btn-info">Читать больше на Wikipedia</a>
+    {% endif %}
+
+    <hr>
+
+    <h3>Комментарии</h3>
+    <ul class="list-group mb-4">
+        {% for comment in comments %}
+            <li class="list-group-item">{{ comment.content }}</li>
+        {% else %}
+            <li class="list-group-item">Пока нет комментариев.</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="content" class="form-label">Оставьте комментарий:</label>
+            <textarea name="content" id="content" class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+    </form>
+{% endblock %}
