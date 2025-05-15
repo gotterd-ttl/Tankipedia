@@ -1,5 +1,6 @@
 from . import db
 
+
 class Nation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -7,6 +8,7 @@ class Nation(db.Model):
 
     def __repr__(self):
         return f'<Nation {self.name}>'
+
 
 class Tank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,6 +23,7 @@ class Tank(db.Model):
     def __repr__(self):
         return f'<Tank {self.name}>'
 
+
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, nullable=False)
@@ -30,6 +33,7 @@ class Rating(db.Model):
 
     def __repr__(self):
         return f'<Rating {self.score} for Tank {self.tank.name}>'
+
 
 # Новая модель для комментариев
 class Comment(db.Model):
